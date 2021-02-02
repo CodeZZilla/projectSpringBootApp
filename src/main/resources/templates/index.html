@@ -32,7 +32,7 @@
         <tbody>
         <tr th:each="stations : ${listStation}" class="trData">
 <!--            <td th:text="${stations.id}">Station id</td>-->
-            <td th:text="${stations.radiostation_name}" class="tdData">Station name</td>
+            <td th:text="${stations.radiostationName}" class="tdData">Station name</td>
             <td th:text="${stations.count}" class="tdData">Station count</td>
             <td class="tdData">
                 <a class="createButton" th:href="@{'/edit/' + ${stations.id}}">Edit</a>

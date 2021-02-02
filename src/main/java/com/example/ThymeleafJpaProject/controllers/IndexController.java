@@ -51,7 +51,7 @@ public class IndexController {
 
             mainDocumentPart.addStyledParagraphOfText("Title", "Document №");
             for(var item : radioStations){
-                mainDocumentPart.addParagraphOfText(item.getRadiostation_name() + " - " +
+                mainDocumentPart.addParagraphOfText(item.getRadiostationName() + " - " +
                         item.getCount());
             }
 

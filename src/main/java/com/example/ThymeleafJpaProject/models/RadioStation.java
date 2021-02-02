@@ -8,7 +8,7 @@ public class RadioStation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String radiostation_name;
+    private String radiostationName;
     private Integer count;
 
     public Integer getId() {
@@ -19,12 +19,12 @@ public class RadioStation {
         this.id = id;
     }
 
-    public String getRadiostation_name() {
-        return radiostation_name;
+    public String getRadiostationName() {
+        return radiostationName;
     }
 
-    public void setRadiostation_name(String name) {
-        this.radiostation_name = name;
+    public void setRadiostationName(String name) {
+        this.radiostationName = name;
     }
 
     public Integer getCount() {
