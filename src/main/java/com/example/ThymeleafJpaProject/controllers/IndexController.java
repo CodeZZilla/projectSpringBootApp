@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.List;
 
@@ -72,9 +74,14 @@ public class IndexController {
     }
 
     @PostMapping("/save")
-    public String saveStations(@ModelAttribute("radioStation") RadioStation radioStation) {
-        service.save(radioStation);
-        return "redirect:/";
+    public String saveStations(@ModelAttribute("radioStation") RadioStation radioStation,
+                               BindingResult errors, HttpServletRequest request){
+        if(errors.hasErrors()){
+            return "redirect:/";
+        }else {
+            service.save(radioStation);
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/edit/{id}")
