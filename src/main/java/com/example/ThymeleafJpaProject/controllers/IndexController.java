@@ -1,17 +1,20 @@
 package com.example.ThymeleafJpaProject.controllers;
 
 import com.example.ThymeleafJpaProject.models.RadioStation;
-
 import com.example.ThymeleafJpaProject.services.RadioStationService;
 import org.apache.commons.io.FileUtils;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +55,7 @@ public class IndexController {
             MainDocumentPart mainDocumentPart = wordPackage.getMainDocumentPart();
 
             mainDocumentPart.addStyledParagraphOfText("Title", "Document №");
-            for(var item : radioStations){
+            for (var item : radioStations) {
                 mainDocumentPart.addParagraphOfText(item.getRadiostationName() + " - " +
                         item.getCount());
             }
@@ -68,17 +71,17 @@ public class IndexController {
             headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
             ResponseEntity<byte[]> response = new ResponseEntity<>(contents, headers, HttpStatus.OK);
             return response;
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity("Err", HttpStatus.NOT_ACCEPTABLE);
         }
     }
 
     @PostMapping("/save")
     public String saveStations(@ModelAttribute("radioStation") RadioStation radioStation,
-                               BindingResult errors, HttpServletRequest request){
-        if(errors.hasErrors()){
+                               BindingResult errors, HttpServletRequest request) {
+        if (errors.hasErrors()) {
             return "redirect:/";
-        }else {
+        } else {
             service.save(radioStation);
             return "redirect:/";
         }
