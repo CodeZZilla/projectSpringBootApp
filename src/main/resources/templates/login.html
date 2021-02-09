@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>Login - Shopme Admin</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous" />
+
+  <link   rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container-fluid text-center">
+
+  <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto;">
+
+    <div th:if="${param.error}">
+      <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+    </div>
+
+    <div th:if="${param.logout}">
+      <p class="text-warning">You have been logged out.</p>
+    </div>
+
+    <div class="border border-secondary p-3 rounded">
+      <p>Access to Mil Station Control</p>
+      <p>
+        <input type="text" name="username" class="form-control" placeholder="Username" required autofocus/>
+      </p>
+      <p>
+        <input type="password" name="password" class="form-control" placeholder="Password" required />
+      </p>
+
+      <p>
+        <input type="submit" value="Login" class="btn btn-primary" />
+      </p>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-md-3">
+      <a class="btn btn-outline-dark" th:href="@{/oauth2/authorization/google}" role="button" style="text-transform:none">
+        <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+        Login with Google
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous">
+</script>
+</body>
+</html>
